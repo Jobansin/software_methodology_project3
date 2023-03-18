@@ -13,20 +13,19 @@ public class TuitionManagerController {
     @FXML
     private TextField fileName;
     @FXML
-    private Button fileSubmit;
-    @FXML
     private TextArea fileContents;
 
     @FXML
     protected void onFileSubmit() {
         try {
             Scanner scanner = new Scanner(new File("src/main/java/" + fileName.getText()));
+            fileContents.clear();
             while (scanner.hasNextLine()) {
                 fileContents.setText(fileContents.getText() + "\n" + scanner.nextLine());
             }
         }
         catch(FileNotFoundException f) {
-            fileContents.setText(fileContents.getText() + "File \""+ fileName.getText() + "\" not found.");
+            fileContents.setText("File \""+ fileName.getText() + "\" not found.");
         }
     }
 }
