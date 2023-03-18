@@ -1,6 +1,6 @@
 package com.example.project3;
 
-import com.example.project3.Date;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +14,7 @@ class DateTest {
      A method that runs the test cases to see if Date isValid method works.
      @author David Harianto, Joban Singh
      **/
-    @org.junit.jupiter.api.Test
+    @Test
     void isValid() {
         // Test cases for Date
         Date date1 = new Date("02/29/2015"); // Tests if a non-leap year and having the day 29 in the month Feb is valid.

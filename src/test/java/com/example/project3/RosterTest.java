@@ -28,7 +28,6 @@ class RosterTest {
 
         TriState student4 = new TriState("Bob", "Jones", "11/30/2007", "BAIT", 0, "PA");
         assertFalse(roster.add(student4));
-
     }
 
     /**
@@ -50,7 +49,5 @@ class RosterTest {
 
         assertFalse(roster.remove(student3));
         assertTrue(roster.remove(student2));
-
-
     }
 }
