@@ -21,38 +21,37 @@ public class TuitionManagerController {
 
     @FXML
     protected void onFileSubmit() {
-        try {
-            Scanner scanner = new Scanner(new File("src/main/java/" + fileName.getText()));
-            fileFound.setText("Students loaded to the roster.");
-            fileFound.setTextFill(Color.GREEN);
-            while (scanner.hasNextLine()) {
-                StringTokenizer list = new StringTokenizer(scanner.nextLine(), ",");
-                String studentType = list.nextToken();
-                if(studentType.equals("R")) {
-                    Resident student = new Resident(list.nextToken(), list.nextToken(), list.nextToken(),
-                            list.nextToken(), Double.parseDouble(list.nextToken()));
-                    roster.add(student);
+        if(!fileName.getText().isEmpty()) {
+            try {
+                Scanner scanner = new Scanner(new File("src/main/java/" + fileName.getText()));
+                fileFound.setText("Students loaded to the roster.");
+                fileFound.setTextFill(Color.GREEN);
+                while (scanner.hasNextLine()) {
+                    StringTokenizer list = new StringTokenizer(scanner.nextLine(), ",");
+                    String studentType = list.nextToken();
+                    if (studentType.equals("R")) {
+                        Resident student = new Resident(list.nextToken(), list.nextToken(), list.nextToken(),
+                                list.nextToken(), Double.parseDouble(list.nextToken()));
+                        roster.add(student);
+                    } else if (studentType.equals("I")) {
+                        International student = new International(list.nextToken(), list.nextToken(), list.nextToken(),
+                                list.nextToken(), Double.parseDouble(list.nextToken()), list.nextToken());
+                        roster.add(student);
+                    } else if (studentType.equals("T")) {
+                        TriState student = new TriState(list.nextToken(), list.nextToken(), list.nextToken(),
+                                list.nextToken(), Double.parseDouble(list.nextToken()), list.nextToken());
+                        roster.add(student);
+                    } else if (studentType.equals("N")) {
+                        NonResident student = new NonResident(list.nextToken(), list.nextToken(), list.nextToken(),
+                                list.nextToken(), Double.parseDouble(list.nextToken()));
+                        roster.add(student);
+                    }
                 }
-                else if(studentType.equals("I")) {
-                    International student = new International(list.nextToken(), list.nextToken(), list.nextToken(),
-                            list.nextToken(), Double.parseDouble(list.nextToken()), list.nextToken());
-                    roster.add(student);
-                }
-                else if(studentType.equals("T")) {
-                    TriState student = new TriState(list.nextToken(), list.nextToken(), list.nextToken(),
-                            list.nextToken(), Double.parseDouble(list.nextToken()), list.nextToken());
-                    roster.add(student);
-                }
-                else if(studentType.equals("N")) {
-                    NonResident student = new NonResident(list.nextToken(), list.nextToken(), list.nextToken(),
-                            list.nextToken(), Double.parseDouble(list.nextToken()));
-                    roster.add(student);
-                }
+                fileName.clear();
+            } catch (FileNotFoundException f) {
+                fileFound.setText("File Not Found.");
+                fileFound.setTextFill(Color.RED);
             }
-        }
-        catch(FileNotFoundException f) {
-            fileFound.setText("File Not Found.");
-            fileFound.setTextFill(Color.RED);
         }
     }
 }
