@@ -139,7 +139,7 @@
                                           <children>
                                              <VBox alignment="CENTER" prefHeight="86.0" prefWidth="156.0">
                                                 <children>
-                                                   <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" selected="true" text="Tristate">
+                                                   <RadioButton disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Tristate">
                                                       <font>
                                                          <Font size="16.0" />
                                                       </font>
@@ -150,7 +150,7 @@
                                                          <ToggleGroup fx:id="outside" />
                                                       </toggleGroup>
                                                    </RadioButton>
-                                                   <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="International" toggleGroup="$outside">
+                                                   <RadioButton disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="International" toggleGroup="$outside">
                                                       <font>
                                                          <Font size="16.0" />
                                                       </font>
@@ -169,7 +169,7 @@
                                           <children>
                                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="163.0">
                                                 <children>
-                                                   <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" selected="true" text="NY">
+                                                   <RadioButton disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="NY">
                                                       <font>
                                                          <Font size="16.0" />
                                                       </font>
@@ -177,14 +177,14 @@
                                                          <ToggleGroup fx:id="state" />
                                                       </toggleGroup>
                                                    </RadioButton>
-                                                   <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="CT" toggleGroup="$state">
+                                                   <RadioButton disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="CT" toggleGroup="$state">
                                                       <font>
                                                          <Font size="16.0" />
                                                       </font>
                                                    </RadioButton>
                                                 </children>
                                              </HBox>
-                                             <CheckBox mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Study abroad">
+                                             <CheckBox disable="true" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Study abroad">
                                                 <font>
                                                    <Font size="16.0" />
                                                 </font>
@@ -395,6 +395,30 @@
                   </children>
                </AnchorPane>
             </content>
+         </Tab>
+         <Tab text="Load File">
+           <content>
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <TextField fx:id="fileName" layoutX="308.0" layoutY="80.0" prefHeight="50.0" prefWidth="470.0">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </TextField>
+                     <Label layoutX="55.0" layoutY="78.0" prefHeight="53.0" prefWidth="253.0" text="Enter filename:">
+                        <font>
+                           <Font size="36.0" />
+                        </font>
+                     </Label>
+                     <Button fx:id="fileSubmit" layoutX="809.0" layoutY="76.0" mnemonicParsing="false" onAction="#onFileSubmit" prefHeight="58.0" prefWidth="107.0" text="Submit">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Button>
+                     <TextArea fx:id="fileContents" editable="false" layoutX="33.0" layoutY="163.0" prefHeight="422.0" prefWidth="922.0" />
+                  </children>
+               </AnchorPane>
+           </content>
          </Tab>
      </tabs>
    </TabPane>
