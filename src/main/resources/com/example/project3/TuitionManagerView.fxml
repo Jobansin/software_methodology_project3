@@ -75,15 +75,14 @@
                                        <Font size="24.0" />
                                     </font>
                                  </Label>
-                                 <TextField GridPane.columnIndex="1" />
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                 <TextField fx:id="fname" GridPane.columnIndex="1" />
+                                 <TextField fx:id="lname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  <Label prefHeight="77.0" prefWidth="484.0" text="Status:" GridPane.rowIndex="5">
                                     <font>
                                        <Font size="24.0" />
                                     </font>
                                  </Label>
-                                 <DatePicker prefHeight="25.0" prefWidth="662.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                 <DatePicker fx:id="dob" editable="false" prefHeight="25.0" prefWidth="672.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <children>
                                        <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="75.0" selected="true" text="BAIT">
@@ -99,7 +98,7 @@
                                              <Font size="16.0" />
                                           </font>
                                        </RadioButton>
-                                       <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="75.0" text="ECE" toggleGroup="$majors">
+                                       <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="75.0" text="EE" toggleGroup="$majors">
                                           <font>
                                              <Font size="16.0" />
                                           </font>
@@ -118,7 +117,7 @@
                                  </HBox>
                                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                     <children>
-                                       <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" selected="true" text="Resident">
+                                       <RadioButton mnemonicParsing="false" onAction="#selectResident" prefHeight="25.0" prefWidth="125.0" selected="true" text="Resident">
                                           <font>
                                              <Font size="16.0" />
                                           </font>
@@ -130,7 +129,7 @@
                                  </HBox>
                                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                     <children>
-                                       <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Non-Resident" toggleGroup="$studentType">
+                                       <RadioButton mnemonicParsing="false" onAction="#selectNonResident" prefHeight="25.0" prefWidth="174.0" text="Non-Resident" toggleGroup="$studentType">
                                           <font>
                                              <Font size="16.0" />
                                           </font>
@@ -139,7 +138,7 @@
                                           <children>
                                              <VBox alignment="CENTER" prefHeight="86.0" prefWidth="156.0">
                                                 <children>
-                                                   <RadioButton disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Tristate">
+                                                   <RadioButton fx:id="tristate" disable="true" mnemonicParsing="false" onAction="#addState" prefHeight="25.0" prefWidth="125.0" text="Tristate">
                                                       <font>
                                                          <Font size="16.0" />
                                                       </font>
@@ -147,10 +146,10 @@
                                                          <Insets bottom="10.0" />
                                                       </VBox.margin>
                                                       <toggleGroup>
-                                                         <ToggleGroup fx:id="outside" />
+                                                         <ToggleGroup fx:id="outsideState" />
                                                       </toggleGroup>
                                                    </RadioButton>
-                                                   <RadioButton disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="International" toggleGroup="$outside">
+                                                   <RadioButton fx:id="international" disable="true" mnemonicParsing="false" onAction="#addStudyAbroad" prefHeight="25.0" prefWidth="125.0" text="International" toggleGroup="$outsideState">
                                                       <font>
                                                          <Font size="16.0" />
                                                       </font>
@@ -169,7 +168,7 @@
                                           <children>
                                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="163.0">
                                                 <children>
-                                                   <RadioButton disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="NY">
+                                                   <RadioButton fx:id="newYork" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="NY">
                                                       <font>
                                                          <Font size="16.0" />
                                                       </font>
@@ -177,14 +176,14 @@
                                                          <ToggleGroup fx:id="state" />
                                                       </toggleGroup>
                                                    </RadioButton>
-                                                   <RadioButton disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="CT" toggleGroup="$state">
+                                                   <RadioButton fx:id="connecticut" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="CT" toggleGroup="$state">
                                                       <font>
                                                          <Font size="16.0" />
                                                       </font>
                                                    </RadioButton>
                                                 </children>
                                              </HBox>
-                                             <CheckBox disable="true" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Study abroad">
+                                             <CheckBox fx:id="studyAbroad" disable="true" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Study abroad">
                                                 <font>
                                                    <Font size="16.0" />
                                                 </font>
@@ -195,7 +194,7 @@
                                  </HBox>
                                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                     <children>
-                                       <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Add">
+                                       <Button mnemonicParsing="false" onAction="#addStudentSubmit" prefHeight="35.0" prefWidth="150.0" text="Add">
                                           <HBox.margin>
                                              <Insets right="20.0" />
                                           </HBox.margin>
@@ -203,7 +202,7 @@
                                              <Font size="16.0" />
                                           </font>
                                        </Button>
-                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Remove">
+                                       <Button mnemonicParsing="false" onAction="#removeStudent" prefHeight="25.0" prefWidth="150.0" text="Remove">
                                           <HBox.margin>
                                              <Insets right="20.0" />
                                           </HBox.margin>
@@ -211,7 +210,7 @@
                                              <Font size="16.0" />
                                           </font>
                                        </Button>
-                                       <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Change Major">
+                                       <Button mnemonicParsing="false" onAction="#changeStudentMajor" prefHeight="35.0" prefWidth="150.0" text="Change Major">
                                           <HBox.margin>
                                              <Insets right="20.0" />
                                           </HBox.margin>
@@ -221,8 +220,14 @@
                                        </Button>
                                     </children>
                                  </HBox>
+                                 <TextField fx:id="creditCompleted" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               </children>
                            </GridPane>
+                           <Label fx:id="studentError" alignment="CENTER" layoutX="115.0" layoutY="497.0" prefHeight="53.0" prefWidth="723.0">
+                              <font>
+                                 <Font size="24.0" />
+                              </font>
+                           </Label>
                         </children>
                      </AnchorPane>
                   </children>
@@ -267,13 +272,13 @@
                                        <Font size="24.0" />
                                     </font>
                                  </Label>
-                                 <TextField GridPane.columnIndex="1" />
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                 <DatePicker prefHeight="25.0" prefWidth="663.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                 <TextField fx:id="fname2" GridPane.columnIndex="1" />
+                                 <TextField fx:id="lname2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 <TextField fx:id="creditCompleted2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                 <DatePicker fx:id="dob2" editable="false" prefHeight="25.0" prefWidth="663.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                       <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Enroll">
+                                       <Button mnemonicParsing="false" onAction="#enrollStudent" prefHeight="30.0" prefWidth="200.0" text="Enroll">
                                           <HBox.margin>
                                              <Insets right="20.0" />
                                           </HBox.margin>
@@ -281,7 +286,7 @@
                                              <Font size="16.0" />
                                           </font>
                                        </Button>
-                                       <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Drop">
+                                       <Button mnemonicParsing="false" onAction="#dropStudent" prefHeight="30.0" prefWidth="200.0" text="Drop">
                                           <font>
                                              <Font size="16.0" />
                                           </font>
@@ -293,6 +298,11 @@
                                  </HBox>
                               </children>
                            </GridPane>
+                           <Label fx:id="studentError2" alignment="CENTER" layoutX="117.0" layoutY="415.0" prefHeight="53.0" prefWidth="723.0">
+                              <font>
+                                 <Font size="24.0" />
+                              </font>
+                           </Label>
                         </children></AnchorPane>
                   </children>
                </AnchorPane>
@@ -336,13 +346,13 @@
                                        <Font size="24.0" />
                                     </font>
                                  </Label>
-                                 <TextField GridPane.columnIndex="1" />
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                 <DatePicker prefHeight="25.0" prefWidth="663.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                 <TextField fx:id="fname3" GridPane.columnIndex="1" />
+                                 <TextField fx:id="lname3" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 <TextField fx:id="scholarshipAmt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                 <DatePicker fx:id="dob3" editable="false" prefHeight="25.0" prefWidth="663.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                       <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="300.0" text="Update Scholarship Amount">
+                                       <Button mnemonicParsing="false" onAction="#updateScholarship" prefHeight="35.0" prefWidth="300.0" text="Update Scholarship Amount">
                                           <HBox.margin>
                                              <Insets right="20.0" />
                                           </HBox.margin>
@@ -354,6 +364,11 @@
                                  </HBox>
                               </children>
                            </GridPane>
+                           <Label fx:id="studentError3" alignment="CENTER" layoutX="7.0" layoutY="389.0" prefHeight="53.0" prefWidth="961.0">
+                              <font>
+                                 <Font size="24.0" />
+                              </font>
+                           </Label>
                         </children></AnchorPane>
                   </children>
                </AnchorPane>
@@ -368,30 +383,33 @@
                              <menus>
                                <Menu mnemonicParsing="false" text="Roster">
                                  <items>
-                                   <MenuItem mnemonicParsing="false" text="Print by Profile" />
-                                       <MenuItem mnemonicParsing="false" text="Print by School and Major" />
-                                       <MenuItem mnemonicParsing="false" text="Print by Standing" />
+                                   <MenuItem mnemonicParsing="false" onAction="#printProfile" text="Print by Profile" />
+                                       <MenuItem mnemonicParsing="false" onAction="#printSchool" text="Print by School and Major" />
+                                       <MenuItem mnemonicParsing="false" onAction="#printStanding" text="Print by Standing" />
                                  </items>
                                </Menu>
                                <Menu mnemonicParsing="false" text="School/College">
                                  <items>
-                                   <MenuItem mnemonicParsing="false" text="RBS" />
-                                       <MenuItem mnemonicParsing="false" text="SAS" />
-                                       <MenuItem mnemonicParsing="false" text="SC&amp;I" />
-                                       <MenuItem mnemonicParsing="false" text="SOE" />
+                                   <MenuItem fx:id="rbs" mnemonicParsing="false" onAction="#printSchool1" text="RBS" />
+                                       <MenuItem fx:id="sas" mnemonicParsing="false" onAction="#printSchool2" text="SAS" />
+                                       <MenuItem fx:id="sci" mnemonicParsing="false" onAction="#printSchool3" text="SC&amp;I" />
+                                       <MenuItem fx:id="soe" mnemonicParsing="false" onAction="#printSchool4" text="SOE" />
                                  </items>
                                </Menu>
                                <Menu mnemonicParsing="false" text="Enrollment">
                                     <items>
-                                       <MenuItem mnemonicParsing="false" text="Print Enrolled Students" />
-                                       <MenuItem mnemonicParsing="false" text="Print Tuition Dues" />
-                                       <MenuItem mnemonicParsing="false" text="Semester End" />
+                                       <MenuItem mnemonicParsing="false" onAction="#printEnrolled" text="Print Enrolled Students" />
+                                       <MenuItem mnemonicParsing="false" onAction="#printTuitionDues" text="Print Tuition Dues" />
+                                       <MenuItem mnemonicParsing="false" onAction="#endSemester" text="Semester End" />
                                     </items>
                                </Menu>
                              </menus>
                            </MenuBar>
                         </children></AnchorPane>
-                     <TextArea editable="false" layoutX="33.0" layoutY="236.0" prefHeight="344.0" prefWidth="902.0" />
+                     <TextArea fx:id="printArea" editable="false" layoutX="33.0" layoutY="169.0" prefHeight="411.0" prefWidth="902.0">
+                        <font>
+                           <Font size="16.0" />
+                        </font></TextArea>
                   </children>
                </AnchorPane>
             </content>

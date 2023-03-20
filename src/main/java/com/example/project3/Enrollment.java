@@ -138,20 +138,22 @@ public class Enrollment {
      This method prints the tuition due for enrolled students.
      @author David Harianto, Joban Singh
      **/
-    public void printTuition(Roster roster) {
+    public String printTuition(Roster roster) {
         if(isEmpty())
-            System.out.println("Enrollment is empty!");
+            return "Enrollment is empty!";
         else {
-            System.out.println("** Tuition due **");
+            StringBuilder string = new StringBuilder();
+            string.append("** Tuition due **\n");
             for (int i = 0; i < size; i++) {
                 if (enrollStudents[i] != null) {
                     DecimalFormat d = new DecimalFormat("'$'0.00");
                     Student temp = roster.getStudent(new Resident(enrollStudents[i].getProfile().getFirstname(),
                             enrollStudents[i].getProfile().getLastname(), enrollStudents[i].getProfile().getDob().toString()));
-                    System.out.println(enrollStudents[i] + ": tuition due: " + d.format(temp.tuitionDue(enrollStudents[i].getCreditsEnrolled())));
+                    string.append(enrollStudents[i] + ": tuition due: " + d.format(temp.tuitionDue(enrollStudents[i].getCreditsEnrolled())) + "\n");
                 }
             }
-            System.out.println("* end of tuition due *");
+            string.append("* end of tuition due *");
+            return string.toString();
         }
     }
 
@@ -159,11 +161,12 @@ public class Enrollment {
      This method prints out all the EnrollStudent objects in the array that are eligible for graduation.
      @author David Harianto, Joban Singh
      **/
-    public void printGraduation(Roster roster) {
+    public String printGraduation(Roster roster) {
         if(isEmpty())
-            System.out.println("Enrollment is empty!");
+            return "Enrollment is empty!";
         else {
-            System.out.println("** list of students eligible for graduation **");
+            StringBuilder string = new StringBuilder();
+            string.append("** list of students eligible for graduation **\n");
             for (int i = 0; i < size; i++) {
                 if (enrollStudents[i] != null) {
                     int totalCredits = enrollStudents[i].getCreditsEnrolled() + roster.getStudent(
@@ -172,11 +175,12 @@ public class Enrollment {
                     if (totalCredits >= 120) {
                         roster.getStudent(new Resident(enrollStudents[i].getProfile().getFirstname(), enrollStudents[i].getProfile().getLastname(),
                                 enrollStudents[i].getProfile().getDob().toString())).setCredit(totalCredits);
-                        System.out.println(roster.getStudent(new Resident(enrollStudents[i].getProfile().getFirstname(), enrollStudents[i].getProfile().getLastname(),
-                                enrollStudents[i].getProfile().getDob().toString())));
+                        string.append(roster.getStudent(new Resident(enrollStudents[i].getProfile().getFirstname(), enrollStudents[i].getProfile().getLastname(),
+                                enrollStudents[i].getProfile().getDob().toString())) + "\n");
                     }
                 }
             }
+            return string.toString();
         }
     }
 
@@ -184,16 +188,18 @@ public class Enrollment {
      This method prints out all the EnrollStudent objects in the array unsorted.
      @author David Harianto, Joban Singh
      **/
-    public void print() {
+    public String print() {
         if(isEmpty())
-            System.out.println("Enrollment is empty!");
+            return "Enrollment is empty!";
         else {
-            System.out.println("** Enrollment **");
+            StringBuilder string = new StringBuilder();
+            string.append("** Enrollment **\n");
             for (int i = 0; i < size; i++) {
                 if (enrollStudents[i] != null)
-                    System.out.println(enrollStudents[i]);
+                    string.append(enrollStudents[i] + "\n");
             }
-            System.out.println("* End of enrollment *");
+            string.append("* End of enrollment *");
+            return string.toString();
         }
     } //print the array as is without sorting
 }

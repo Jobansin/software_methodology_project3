@@ -63,23 +63,18 @@ public class Roster {
             if (roster[x] == null) {
                 // Check if credits are valid
                 if (student.isValid(student.getCreditCompleted()) == false) {
-                    badCredit(student.isValid(student.getCreditCompleted()));
                     return false;
                 }
                 // Check if major is valid
                 else if (student.getMajor() == Major.UNKNOWN) {
-                    badMajor(student);
                     return false;
                 }
                 // Check if student already exists
                 else if (this.contains(student)) {
-                    this.studentExists(student);
                     return false;
                 } else if (student.getProfile().getDob().isValid() == false) {
-                    badDate(student.getProfile().getDob().isValid(), student);
                     return false;
                 } else if (validDate(student.getProfile().getDob()) == false) {
-                    underAge(validDate(student.getProfile().getDob()), student);
                     return false;
                 } else {
                     roster[x] = student;
@@ -186,10 +181,8 @@ public class Roster {
      **/
     public boolean remove(Student student) {
         if (checkEmpty()) {
-            empty();
             return false;
         } else if (!this.contains(student)) {
-            invalidStudent(this.contains(student), student);
             return false;
         } else {
             Student[] temporary = new Student[size];
@@ -206,7 +199,6 @@ public class Roster {
                 }
             }
             roster = temporary;
-            studentRemoved(removed);
             return true;
         }
     }//maintain the order after remove
@@ -264,18 +256,17 @@ public class Roster {
      *
      * @author David Harianto, Joban Singh
      **/
-    public void majorChange(Student student, String major) {
+    public boolean majorChange(Student student, String major) {
         if (checkEmpty()) {
-            System.out.println("Student roster is empty!");
+            //return "Student roster is empty!";
+            return false;
         } else if (!this.contains(student)) {
-            System.out.println(student.getProfile() + " is not in the roster.");
+            //return student.getProfile() + " is not in the roster.";
+            return false;
         } else {
-            try {
-                roster[this.find(student)].changeMajor(Major.valueOf(major.toUpperCase()));
-                System.out.println(roster[this.find(student)].getProfile() + " major changed to " + major.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                System.out.println("Major code invalid: " + major);
-            }
+            //return roster[this.find(student)].getProfile() + " major changed to " + major.toUpperCase();
+            roster[this.find(student)].changeMajor(Major.valueOf(major.toUpperCase()));
+            return true;
         }
     }
 
@@ -313,12 +304,12 @@ public class Roster {
      *
      * @author David Harianto, Joban Singh
      **/
-    public void printSchool(String school) {
+    public String printSchool(String school) {
         if (checkEmpty()) {
-            System.out.println("Student roster is empty!");
+            return "Student roster is empty!";
         } else if (!school.trim().toUpperCase().equals("SAS") && !school.trim().toUpperCase().equals("SOE")
                 && !school.trim().toUpperCase().equals("RBS") && !school.trim().toUpperCase().equals("SC&I")) {
-            System.out.println("School doesn't exist: " + school);
+            return "School doesn't exist: " + school;
         } else {
             if (lastStudent() > 0) {
                 for (int i = 0; i <= lastStudent(); i++) {
@@ -331,15 +322,17 @@ public class Roster {
                     }
                 }
             }
-            System.out.println("* Students in " + school + " *");
+            StringBuilder string = new StringBuilder();
+            string.append("* Students in " + school + " *\n");
             for (int i = 0; i < size; i++) {
                 if (roster[i] != null) {
                     if (roster[i].getMajor().getSchool().equals(school.trim().toUpperCase())) {
-                        System.out.println(roster[i]);
+                        string.append(roster[i] + "\n");
                     }
                 }
             }
-            System.out.println("* end of list **");
+            string.append("* end of list **");
+            return string.toString();
         }
 
     }
@@ -349,9 +342,9 @@ public class Roster {
      *
      * @author David Harianto, Joban Singh
      **/
-    public void print() {
+    public String print() {
         if (checkEmpty()) {
-            System.out.println("Student roster is empty!");
+            return "Student roster is empty!";
         } else {
             if (lastStudent() > 0) {
                 for (int i = 0; i <= lastStudent(); i++) {
@@ -364,12 +357,14 @@ public class Roster {
                     }
                 }
             }
-            System.out.println("* Student roster sorted by last name, first name, DOB **");
+            StringBuilder string = new StringBuilder();
+            string.append("* Student roster sorted by last name, first name, DOB **\n");
             for (int i = 0; i < size; i++) {
                 if (roster[i] != null)
-                    System.out.println(roster[i]);
+                    string.append(roster[i] + "\n");
             }
-            System.out.println("* end of roster **");
+            string.append("* end of roster **");
+            return string.toString();
         }
     } //print roster sorted by profiles
 
@@ -378,9 +373,9 @@ public class Roster {
      *
      * @author David Harianto, Joban Singh
      **/
-    public void printBySchoolMajor() {
+    public String printBySchoolMajor() {
         if (checkEmpty()) {
-            System.out.println("Student roster is empty!");
+            return "Student roster is empty!";
         } else {
             if (lastStudent() > 0) {
                 for (int i = 0; i <= lastStudent(); i++) {
@@ -405,12 +400,14 @@ public class Roster {
                     }
                 }
             }
-            System.out.println("* Student roster sorted by school, major **");
+            StringBuilder string = new StringBuilder();
+            string.append("* Student roster sorted by school, major **\n");
             for (int i = 0; i < size; i++) {
                 if (roster[i] != null)
-                    System.out.println(roster[i]);
+                    string.append(roster[i] + "\n");
             }
-            System.out.println("* end of roster **");
+            string.append("* end of roster **");
+            return string.toString();
         }
 
     } //print roster sorted by school major
@@ -420,9 +417,9 @@ public class Roster {
      *
      * @author David Harianto, Joban Singh
      **/
-    public void printByStanding() {
+    public String printByStanding() {
         if (checkEmpty()) {
-            System.out.println("Student roster is empty!");
+            return "Student roster is empty!";
         } else {
             if (lastStudent() > 0) {
                 for (int i = 0; i <= lastStudent() ; i++) {
@@ -441,12 +438,14 @@ public class Roster {
                     }
                 }
             }
-            System.out.println("* Student roster sorted by standing **");
+            StringBuilder string = new StringBuilder();
+            string.append("* Student roster sorted by standing **\n");
             for (int i = 0; i < size; i++) {
                 if (roster[i] != null)
-                    System.out.println(roster[i]);
+                    string.append(roster[i] + "\n");
             }
-            System.out.println("* end of roster **");
+            string.append("* end of roster **");
+            return string.toString();
         }
     } //print roster sorted by standing
 }
